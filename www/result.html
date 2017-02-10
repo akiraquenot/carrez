@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Good deal ?</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <div class="form-style-5" style="background-color: rgba(255, 255, 255, 0.5)">
+        <h1>Good deal ?</h1>
+
+        <div id = "result"></div>
+        <br>
+        <fieldset>
+            <legend><span class="number">1</span> Le Bon Coin</legend>
+            <div id = "lbc">
+                <div id = 'type'></div>
+                <div id = 'price'></div>
+                <div id = 'surface'></div>
+            </div>
+            <br>
+            <legend><span class="number">1</span> Meilleurs agents</legend>
+            <div id = "meilleursagents">
+                <div id = 'ma'>Price/m2 : </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.getJSON("output.json", function(result) {
+                var type = result.type;
+                var price = result.price;
+                var surface = result.surface;
+                document.getElementById("type").innerHTML = "Type : "+type;
+                document.getElementById("price").innerHTML = "Price : "+price + " €";
+                document.getElementById("surface").innerHTML = "Surface : "+surface+ " m2";
+
+                readOutput2(type, price, surface);
+            });
+
+        });
+
+        function readOutput2(type, price, surface){
+            $.getJSON("output2.json", function(result) {
+                var prixAppartement = result.price_house;
+                var prixMaison = result.price_flat;
+
+                if(type == "Appartement") document.getElementById("ma").innerHTML="Price/m2 : "+prixAppartement + " €  ("+type+")";
+                else document.getElementById("ma").innerHTML="Price/m2 : "+prixMaison + " €  ("+type+")";
+
+                goodDeal(type, price, surface, prixAppartement, prixMaison);
+            });
+        }
+
+        function goodDeal(type, price, surface, prixAppartement, prixMaison){
+            switch(type){
+                case "Appartement":
+                    if(price < prixAppartement*surface) document.getElementById("result").innerHTML= "<p class='vert' >GOOD DEAL !</p>";
+                    else document.getElementById("result").innerHTML= "<p class='rouge' >BAD DEAL ...</p>";
+                break;
+                case "Maison":
+                    if(price < prixMaison*surface) document.getElementById("result").innerHTML= "<p class='vert' >GOOD DEAL !</p>";
+                    else document.getElementById("result").innerHTML= "<p class='rouge' >BAD DEAL ...</p>";
+                break;
+
+            }
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Good deal ?</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <div class="form-style-5" id = "form" style="background-color: rgba(255, 255, 255, 0.5)">
+        <h1>Good deal ?</h1>
+        <form action = "http://localhost:3000/process_get" method = "GET">
+            <fieldset>
+                <legend><span class="number">1</span> Le Bon Coin</legend>
+                    <input id="url" name = "url" class="model" type="text" name="field1" placeholder="http://leboncoin.fr/..."/>
+            </fieldset>
+            <br>
+            <input type="submit" value="Compute">
+        </form>
+    </div>
+  </body>
+</html>

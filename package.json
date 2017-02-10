@@ -1,0 +1,18 @@
+{
+  "name": "akiraquenot",
+  "version": "0.0.1",
+  "description": "Scrape le web.",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cheerio": "latest",
+    "express": "^4.14.0",
+    "request": "latest"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "license": "ISC"
+}
